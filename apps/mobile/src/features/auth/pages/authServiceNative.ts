@@ -1,17 +1,7 @@
 // apps/mobile/src/features/auth/services/authServiceNative.ts
 
-import Constants from 'expo-constants'
-
-// Asegúrate de definir en tu app.json bajo "extra" la clave API_URL:
-// {
-//   "expo": {
-//     …,
-//     "extra": {
-//       "API_URL": "https://tu-api.com"
-//     }
-//   }
-// }
-const API_URL = Constants.expoConfig?.extra?.API_URL
+// url de env
+import { API_URL } from '@env'
 
 async function getCSRFToken(): Promise<string> {
   const res = await fetch(`${API_URL}/csrf-token`, {

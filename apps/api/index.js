@@ -10,7 +10,8 @@ import { projectRouter } from "./routes/project.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
+const HOST = process.env.HOST || "0.0.0.0";
+const ORIGIN = process.env.CORS_ORIGIN || "*";
 
 const app = express();
 const csrfProtection = csrf({ cookie: true });
@@ -18,7 +19,7 @@ const csrfProtection = csrf({ cookie: true });
 app.use(cookieParser());
 app.use(
   cors({
-    origin: FRONTEND_ORIGIN,
+    origin: ORIGIN === "*" ? true : ORIGIN,
     credentials: true,
   })
 );
@@ -48,6 +49,6 @@ app.get("/csrf-token", csrfProtection, (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Servidor corriendo en http://${HOST}:${PORT}`);
 });

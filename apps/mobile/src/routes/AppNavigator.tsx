@@ -19,7 +19,7 @@ const AppNavigator: React.FC = () => (
       initialRouteName="Landing"
       screenOptions={{ headerShown: false }}
     >
-      {/* Pantalla de aterrizaje sin header */}
+      {/* Landing page */}
       <Stack.Screen name="Landing">
         {() => (
           <PlainLayout>
@@ -28,7 +28,7 @@ const AppNavigator: React.FC = () => (
         )}
       </Stack.Screen>
 
-      {/* Login y Register usan AuthLayout */}
+      {/* Login y Register con AuthLayout */}
       <Stack.Screen name="Login">
         {() => (
           <AuthLayout>
