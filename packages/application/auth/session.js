@@ -19,17 +19,15 @@ export function sessionAuth(token, ip, ua) {
   }
 }
 
-export function sessionRefresh(req) {
-  const token = req.cookies.refreshToken;
-
+export function sessionRefresh({ token, ip, ua }) {
   try {
     const decoded = verifyRefreshToken(token);
 
     const newAccessToken = generateAccessToken({
       uuid_user: decoded.uuid_user,
       role: decoded.role,
-      ip: req.ip,
-      ua: req.headers["user-agent"],
+      ip,
+      ua,
     });
 
     return newAccessToken;

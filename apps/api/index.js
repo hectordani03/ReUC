@@ -6,10 +6,10 @@ import dotenv from "dotenv";
 
 import mobileRouter from "./routes/mobile/index.js";
 
-import { authRouter } from "./routes/auth.js";
-import { projectRouter } from "./routes/project.js";
+import { authRouter } from "./routes/auth/index.js";
+import { projectRouter } from "./routes/project/index.js";
+import { profileRouter } from "./routes/profile/index.js";
 import { adminRouter } from "./routes/admin.js";
-import { profileRouter } from "./routes/profile.js";
 
 dotenv.config();
 
