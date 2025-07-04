@@ -4,10 +4,12 @@ import csrf from "csurf";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import { authRouter } from "./routes/auth.js";
-import { projectRouter } from "./routes/project.js";
+import mobileRouter from "./routes/mobile/index.js";
+
+import { authRouter } from "./routes/auth/index.js";
+import { projectRouter } from "./routes/project/index.js";
+import { profileRouter } from "./routes/profile/index.js";
 import { adminRouter } from "./routes/admin.js";
-import { profileRouter } from "./routes/profile.js";
 
 dotenv.config();
 
@@ -36,23 +38,25 @@ app.use((req, res, next) => {
   next();
 });
 
-// Rutas Auth
+// Namespace mobile routes
+app.use("/mobile", mobileRouter);
+
+// Routes Auth
 app.use("/auth", authRouter);
 
-// Rutas Project
+// Routes Project
 app.use("/project", projectRouter);
 
-// Rutas Admin
+// Routes Admin
 app.use("/admin", adminRouter);
 
-// Rutas Outsider
+// Routes Outsider
 app.use("/outsider", profileRouter);
 
-// Rutas base
+// Routes base
 app.get("/", (req, res) => {
   res.send("Hello Word!!!");
 });
-
 app.get("/csrf-token", csrfProtection, (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });

@@ -22,6 +22,16 @@ export function authMiddleware(req, res, next) {
   }
 }
 
+export function requireMobileClient(req, res, next) {
+  const clientType = req.headers["x-client-type"];
+  if (clientType !== "mobile") {
+    return res
+      .status(403)
+      .json({ error: "Acceso denegado: se requiere cliente móvil" });
+  }
+  next();
+}
+
 export const requireOutsider = (req, res, next) => {
   const [role, uuid_outsider] = req.user?.role?.split(":") || [];
   if (role !== "outsider") {
